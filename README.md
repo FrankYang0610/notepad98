@@ -1,5 +1,8 @@
 # Notepad98
 
+> [!NOTE]
+> This project was generated almost entirely with AI assistance.
+
 A Windows 98-style Notepad for the web, built with 98.css.
 
 Notepad98 is a single-page static web app. It recreates the classic Notepad
