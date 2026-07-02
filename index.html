@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Untitled - Notepad98</title>
+		<link rel="stylesheet" href="vendor/98.css/98.css">
+		<link rel="stylesheet" href="src/app.css">
+	</head>
+	<body>
+		<main class="desktop" id="desktop">
+			<section class="window notepad-window" id="appWindow" aria-label="Notepad98">
+				<div class="title-bar" id="titleBar">
+					<div class="title-bar-text" id="titleText">Untitled - Notepad98</div>
+					<div class="title-bar-controls">
+						<button aria-label="Minimize" id="minimizeButton"></button>
+						<button aria-label="Maximize" id="maximizeButton"></button>
+						<button aria-label="Close" id="closeButton"></button>
+					</div>
+				</div>
+
+				<nav class="menu-bar" aria-label="Application menu">
+					<div class="menu">
+						<button class="menu-button" type="button"><u>F</u>ile</button>
+						<div class="menu-popup">
+							<button type="button" data-action="newFile"><span><u>N</u>ew</span><kbd>Ctrl+N</kbd></button>
+							<button type="button" data-action="openFile"><span><u>O</u>pen...</span><kbd>Ctrl+O</kbd></button>
+							<button type="button" data-action="saveFile"><span><u>S</u>ave</span><kbd>Ctrl+S</kbd></button>
+							<button type="button" data-action="saveAsFile"><span>Save <u>A</u>s...</span></button>
+							<hr>
+							<button type="button" data-action="pageSetup"><span>Page Set<u>u</u>p...</span></button>
+							<button type="button" data-action="printFile"><span><u>P</u>rint...</span><kbd>Ctrl+P</kbd></button>
+							<hr>
+							<button type="button" data-action="exitApp"><span>E<u>x</u>it</span></button>
+						</div>
+					</div>
+					<div class="menu">
+						<button class="menu-button" type="button"><u>E</u>dit</button>
+						<div class="menu-popup">
+							<button type="button" data-action="undo"><span><u>U</u>ndo</span><kbd>Ctrl+Z</kbd></button>
+							<hr>
+							<button type="button" data-action="cut"><span>Cu<u>t</u></span><kbd>Ctrl+X</kbd></button>
+							<button type="button" data-action="copy"><span><u>C</u>opy</span><kbd>Ctrl+C</kbd></button>
+							<button type="button" data-action="paste"><span><u>P</u>aste</span><kbd>Ctrl+V</kbd></button>
+							<button type="button" data-action="deleteSelection"><span>De<u>l</u>ete</span><kbd>Del</kbd></button>
+							<hr>
+							<button type="button" data-action="selectAll"><span>Select <u>A</u>ll</span><kbd>Ctrl+A</kbd></button>
+							<button type="button" data-action="insertTimeDate"><span>Time/<u>D</u>ate</span><kbd>F5</kbd></button>
+						</div>
+					</div>
+					<div class="menu">
+						<button class="menu-button" type="button"><u>S</u>earch</button>
+						<div class="menu-popup">
+							<button type="button" data-action="showFind"><span><u>F</u>ind...</span><kbd>Ctrl+F</kbd></button>
+							<button type="button" data-action="findNext"><span>Find <u>N</u>ext</span><kbd>F3</kbd></button>
+							<button type="button" data-action="showReplace"><span><u>R</u>eplace...</span><kbd>Ctrl+H</kbd></button>
+							<button type="button" data-action="goToLine" id="goToMenuItem"><span><u>G</u>o To...</span><kbd>Ctrl+G</kbd></button>
+						</div>
+					</div>
+					<div class="menu">
+						<button class="menu-button" type="button">F<u>o</u>rmat</button>
+						<div class="menu-popup">
+							<button type="button" data-action="toggleWordWrap" id="wordWrapMenuItem"><span class="checkmark"></span><span><u>W</u>ord Wrap</span></button>
+							<button type="button" data-action="showFont"><span><u>F</u>ont...</span></button>
+						</div>
+					</div>
+					<div class="menu">
+						<button class="menu-button" type="button"><u>V</u>iew</button>
+						<div class="menu-popup">
+							<button type="button" data-action="toggleStatusBar" id="statusBarMenuItem"><span class="checkmark">&#10003;</span><span><u>S</u>tatus Bar</span></button>
+							<button type="button" data-action="toggleSoftPixels" id="softPixelsMenuItem"><span class="checkmark">&#10003;</span><span>Soft <u>P</u>ixels</span></button>
+						</div>
+					</div>
+					<div class="menu">
+						<button class="menu-button" type="button"><u>H</u>elp</button>
+						<div class="menu-popup">
+							<button type="button" data-action="showHelp"><span><u>H</u>elp Topics</span><kbd>F1</kbd></button>
+							<hr>
+							<button type="button" data-action="showAbout"><span><u>A</u>bout Notepad98</span></button>
+						</div>
+					</div>
+				</nav>
+
+				<div class="editor-frame">
+					<textarea id="editor" spellcheck="false" autofocus></textarea>
+				</div>
+
+				<div class="status-bar" id="statusBar">
+					<p class="status-bar-field" id="statusFile">Plain Text</p>
+					<p class="status-bar-field" id="statusPosition">Ln 1, Col 1</p>
+					<p class="status-bar-field" id="statusEncoding">UTF-8</p>
+				</div>
+			</section>
+		</main>
+
+		<input type="file" id="fileInput" accept=".txt,text/plain,*/*" hidden>
+
+		<div class="modal-layer" id="modalLayer" hidden></div>
+
+		<template id="findTemplate">
+			<section class="window dialog find-dialog" role="dialog" aria-modal="true" aria-labelledby="findTitle">
+				<div class="title-bar">
+					<div class="title-bar-text" id="findTitle">Find</div>
+					<div class="title-bar-controls"><button aria-label="Close" data-dialog-close></button></div>
+				</div>
+				<div class="window-body">
+					<div class="field-row">
+						<label for="findText">Fi<u>n</u>d what:</label>
+						<input id="findText" type="text">
+					</div>
+					<div class="dialog-columns">
+						<fieldset>
+							<legend>Direction</legend>
+							<div class="field-row">
+								<input id="findUp" type="radio" name="direction" value="up">
+								<label for="findUp">Up</label>
+							</div>
+							<div class="field-row">
+								<input id="findDown" type="radio" name="direction" value="down" checked>
+								<label for="findDown">Down</label>
+							</div>
+						</fieldset>
+						<div class="dialog-buttons">
+							<button class="default" type="button" data-dialog-action="findNext">Find Next</button>
+							<button type="button" data-dialog-close>Cancel</button>
+						</div>
+					</div>
+					<div class="field-row">
+						<input id="matchCase" type="checkbox">
+						<label for="matchCase">Match case</label>
+					</div>
+				</div>
+			</section>
+		</template>
+
+		<template id="replaceTemplate">
+			<section class="window dialog replace-dialog" role="dialog" aria-modal="true" aria-labelledby="replaceTitle">
+				<div class="title-bar">
+					<div class="title-bar-text" id="replaceTitle">Replace</div>
+					<div class="title-bar-controls"><button aria-label="Close" data-dialog-close></button></div>
+				</div>
+				<div class="window-body">
+					<div class="field-row">
+						<label for="replaceFind">Fi<u>n</u>d what:</label>
+						<input id="replaceFind" type="text">
+					</div>
+					<div class="field-row">
+						<label for="replaceWith">Replace <u>w</u>ith:</label>
+						<input id="replaceWith" type="text">
+					</div>
+					<div class="field-row">
+						<input id="replaceMatchCase" type="checkbox">
+						<label for="replaceMatchCase">Match case</label>
+					</div>
+					<div class="dialog-buttons horizontal">
+						<button class="default" type="button" data-dialog-action="findNext">Find Next</button>
+						<button type="button" data-dialog-action="replaceOne">Replace</button>
+						<button type="button" data-dialog-action="replaceAll">Replace All</button>
+						<button type="button" data-dialog-close>Cancel</button>
+					</div>
+				</div>
+			</section>
+		</template>
+
+		<template id="fontTemplate">
+			<section class="window dialog font-dialog" role="dialog" aria-modal="true" aria-labelledby="fontTitle">
+				<div class="title-bar">
+					<div class="title-bar-text" id="fontTitle">Font</div>
+					<div class="title-bar-controls"><button aria-label="Close" data-dialog-close></button></div>
+				</div>
+				<div class="window-body">
+					<div class="font-grid">
+						<div class="field-row-stacked">
+							<label for="fontFamily">Font:</label>
+							<select id="fontFamily">
+								<option value="notepad">Fixedsys-style</option>
+								<option value="mono">Courier New</option>
+								<option value="system">Pixelated MS Sans Serif</option>
+							</select>
+						</div>
+						<div class="field-row-stacked">
+							<label for="fontSize">Size:</label>
+							<select id="fontSize">
+								<option>12</option>
+								<option selected>14</option>
+								<option>16</option>
+								<option>18</option>
+								<option>20</option>
+								<option>24</option>
+							</select>
+						</div>
+					</div>
+					<fieldset>
+						<legend>Sample</legend>
+						<div class="font-sample" id="fontSample">AaBbYyZz 0123456789</div>
+					</fieldset>
+					<div class="dialog-buttons horizontal">
+						<button class="default" type="button" data-dialog-action="applyFont">OK</button>
+						<button type="button" data-dialog-close>Cancel</button>
+					</div>
+				</div>
+			</section>
+		</template>
+
+		<template id="messageTemplate">
+			<section class="window dialog message-dialog" role="dialog" aria-modal="true" aria-labelledby="messageTitle">
+				<div class="title-bar">
+					<div class="title-bar-text" id="messageTitle">Notepad98</div>
+					<div class="title-bar-controls"><button aria-label="Close" data-dialog-close></button></div>
+				</div>
+				<div class="window-body">
+					<p id="messageBody"></p>
+					<div class="dialog-buttons horizontal" id="messageButtons"></div>
+				</div>
+			</section>
+		</template>
+
+		<script src="src/app.js"></script>
+	</body>
+</html>

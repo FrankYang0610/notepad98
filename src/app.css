@@ -1,0 +1,339 @@
+html,
+body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	overflow: hidden;
+}
+
+body {
+	background: #008080;
+	color: #222;
+}
+
+.desktop {
+	box-sizing: border-box;
+	display: flex;
+	width: 100%;
+	height: 100%;
+	padding: 14px;
+}
+
+.notepad-window {
+	box-sizing: border-box;
+	display: grid;
+	grid-template-rows: auto auto 1fr auto;
+	width: min(1100px, calc(100vw - 28px));
+	height: min(760px, calc(100vh - 28px));
+	min-width: 520px;
+	min-height: 360px;
+	margin: auto;
+	resize: both;
+	overflow: hidden;
+}
+
+.notepad-window.maximized {
+	width: calc(100vw - 8px);
+	height: calc(100vh - 8px);
+	margin: 4px;
+	resize: none;
+}
+
+.notepad-window.minimized {
+	height: auto;
+	min-height: 0;
+	align-self: flex-end;
+	resize: none;
+}
+
+.notepad-window.minimized .menu-bar,
+.notepad-window.minimized .editor-frame,
+.notepad-window.minimized .status-bar {
+	display: none;
+}
+
+.title-bar {
+	cursor: default;
+}
+
+.title-bar-text {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.menu-bar {
+	position: relative;
+	z-index: 5;
+	display: flex;
+	align-items: stretch;
+	height: 22px;
+	padding: 0 2px;
+	background: silver;
+	font-family: "Pixelated MS Sans Serif", Arial, sans-serif;
+	font-size: 11px;
+}
+
+.menu {
+	position: relative;
+}
+
+.menu-button,
+.menu-popup button {
+	min-width: 0;
+	min-height: 0;
+}
+
+.menu-button {
+	height: 20px;
+	padding: 1px 7px 2px;
+	background: transparent;
+	box-shadow: none;
+}
+
+.menu.open .menu-button,
+.menu-button:focus {
+	box-shadow: inset -1px -1px #fff, inset 1px 1px grey;
+	outline: none;
+}
+
+.menu-popup {
+	position: absolute;
+	top: 21px;
+	left: 0;
+	display: none;
+	min-width: 178px;
+	padding: 2px;
+	background: silver;
+	box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey, inset 2px 2px #dfdfdf;
+}
+
+.menu.open .menu-popup {
+	display: block;
+}
+
+.menu-popup button {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	height: 20px;
+	padding: 2px 18px 2px 18px;
+	background: transparent;
+	box-shadow: none;
+	color: #222;
+	text-align: left;
+	text-shadow: none;
+	white-space: nowrap;
+}
+
+.menu-popup button:hover,
+.menu-popup button:focus {
+	background: navy;
+	color: #fff;
+	outline: none;
+}
+
+.menu-popup button:disabled {
+	color: grey;
+	text-shadow: 1px 1px #fff;
+}
+
+.menu-popup button:disabled:hover {
+	background: transparent;
+	color: grey;
+}
+
+.menu-popup kbd {
+	margin-left: 28px;
+	font: inherit;
+}
+
+.menu-popup hr {
+	height: 1px;
+	margin: 3px 2px;
+	border: 0;
+	background: grey;
+	box-shadow: 0 1px #fff;
+}
+
+.checkmark {
+	position: absolute;
+	left: 6px;
+}
+
+.editor-frame {
+	min-height: 0;
+	padding: 0 1px 1px;
+	background: silver;
+}
+
+#editor {
+	box-sizing: border-box;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	overflow: auto;
+	border: none;
+	resize: none;
+	background: #fff;
+	color: #111;
+	box-shadow: inset -1px -1px #fff, inset 1px 1px grey, inset -2px -2px #dfdfdf, inset 2px 2px #0a0a0a;
+	font-family: "Courier New", "Lucida Console", monospace;
+	font-size: 14px;
+	line-height: 1.25;
+	white-space: pre;
+	-webkit-font-smoothing: none;
+	text-rendering: geometricPrecision;
+	caret-color: #000;
+}
+
+body.soft-pixels #editor {
+	text-shadow: 0.45px 0 #333;
+	filter: contrast(1.12);
+}
+
+#editor.word-wrap {
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+.status-bar {
+	display: flex;
+	height: 22px;
+	padding-top: 2px;
+	background: silver;
+}
+
+.status-bar.hidden {
+	display: none;
+}
+
+.status-bar-field {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+#statusFile {
+	flex: 1 1 auto;
+}
+
+#statusPosition,
+#statusEncoding {
+	flex: 0 0 118px;
+}
+
+.modal-layer {
+	position: fixed;
+	inset: 0;
+	z-index: 50;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: rgba(0, 0, 0, 0.08);
+}
+
+.modal-layer[hidden] {
+	display: none;
+}
+
+.dialog {
+	min-width: 320px;
+	max-width: calc(100vw - 40px);
+}
+
+.find-dialog,
+.replace-dialog {
+	width: 390px;
+}
+
+.font-dialog {
+	width: 360px;
+}
+
+.message-dialog {
+	width: 360px;
+}
+
+.dialog .window-body {
+	margin: 10px;
+}
+
+.dialog input[type="text"],
+.dialog select {
+	flex: 1;
+}
+
+.dialog-columns {
+	display: grid;
+	grid-template-columns: 1fr auto;
+	gap: 10px;
+	margin-top: 10px;
+}
+
+.dialog-buttons {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	justify-content: flex-start;
+}
+
+.dialog-buttons.horizontal {
+	flex-direction: row;
+	justify-content: flex-end;
+	margin-top: 12px;
+}
+
+.dialog-buttons button {
+	min-width: 82px;
+}
+
+.font-grid {
+	display: grid;
+	grid-template-columns: 1fr 88px;
+	gap: 10px;
+	margin-bottom: 10px;
+}
+
+.font-sample {
+	box-sizing: border-box;
+	height: 54px;
+	padding: 10px;
+	background: #fff;
+	box-shadow: inset -1px -1px #fff, inset 1px 1px grey, inset -2px -2px #dfdfdf, inset 2px 2px #0a0a0a;
+	font-family: "Courier New", monospace;
+	font-size: 14px;
+}
+
+@media print {
+	body {
+		background: #fff;
+	}
+
+	.desktop,
+	.notepad-window,
+	.editor-frame {
+		display: block;
+		width: auto;
+		height: auto;
+		padding: 0;
+		margin: 0;
+		box-shadow: none;
+		background: #fff;
+	}
+
+	.title-bar,
+	.menu-bar,
+	.status-bar {
+		display: none;
+	}
+
+	#editor {
+		width: 100%;
+		height: auto;
+		min-height: 100vh;
+		box-shadow: none;
+		white-space: pre-wrap;
+	}
+}

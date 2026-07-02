@@ -1,0 +1,19 @@
+# macOS metadata
+.DS_Store
+.AppleDouble
+._*
+
+# Editor and IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+.cache/
+tmp/
+temp/
