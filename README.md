@@ -6,6 +6,14 @@ Notepad98 is a single-page static web app. It recreates the classic Notepad
 window, menu bar, text editor, and status bar while using browser-native file
 APIs for local text files.
 
+## Live Demo
+
+GitHub Pages:
+
+```text
+https://frankyang0610.github.io/notepad98/
+```
+
 ## Features
 
 - New, Open, Save, Save As, Page Setup notice, Print, and Exit notice
