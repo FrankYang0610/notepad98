@@ -179,7 +179,7 @@ body {
 	background: #fff;
 	color: #111;
 	box-shadow: inset -1px -1px #fff, inset 1px 1px grey, inset -2px -2px #dfdfdf, inset 2px 2px #0a0a0a;
-	font-family: "Courier New", "Lucida Console", monospace;
+	font-family: "Lucida Console", "Courier New", monospace;
 	font-size: 14px;
 	line-height: 1.25;
 	white-space: pre;

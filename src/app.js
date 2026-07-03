@@ -10,7 +10,7 @@
 		softPixels: true,
 		findText: "",
 		matchCase: false,
-		fontFamily: "mono",
+		fontFamily: "notepad",
 		fontSize: "14",
 		pageSetup: {
 			header: "&f",
